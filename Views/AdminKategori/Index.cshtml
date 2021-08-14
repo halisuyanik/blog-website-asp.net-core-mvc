@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MVC_Blog_Website.Models.Kategori>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="font-family:'Century Gothic';margin-left:15px;">Kategoriler</h2>
+
+<p style="font-family:'Century Gothic';margin-left:15px;">
+    @Html.ActionLink("Yeni Kategori Oluştur", "Create")
+</p>
+<table class="table" style="font-family:'Century Gothic';margin-left:15px;">
+    <tr>
+        <th>
+            <label>Kategori Adı</label>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KategoriAdi)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.KategoriId }) |
+                @Html.ActionLink("Detay", "Details", new { id = item.KategoriId }) |
+                @Html.ActionLink("Sil", "Delete", new { id = item.KategoriId })
+            </td>
+        </tr>
+    }
+
+</table>

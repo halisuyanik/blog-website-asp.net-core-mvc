@@ -1,0 +1,84 @@
+﻿@model MVC_Blog_Website.Models.Makale
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="font-family:'Century Gothic';margin-left:15px;">Makaleyi Sil</h2>
+
+<h4 style="font-family:'Century Gothic';margin-left:15px;">Makaleyi silmek istiyor musunuz ?</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal" style="font-family:'Century Gothic';margin-left:15px;">
+        <dt>
+            <label>Kategori Adı</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategori.KategoriAdi)
+        </dd>
+
+        <dt>
+            <label>Başlık</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Baslik)
+        </dd>
+
+        <dt>
+            <label>İçerik</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Icerik)
+        </dd>
+
+        <dt>
+            <label>Thumbnail</label>
+        </dt>
+
+        <dd>
+            <img src="@Model.Gorsel" width="150" />
+            @*@Html.DisplayFor(model => model.Gorsel)*@
+        </dd>
+
+        <dt>
+            <label>Tarih</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tarih)
+        </dd>
+
+        <dt>
+            <label>Üye Id</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UyeId)
+        </dd>
+
+        <dt>
+            <label>Okunma</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Okunma)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <a href="/AdminMakale/Index/"><input type="button" value="Geri Dön" class="btn btn-danger" /></a>
+                <input type="submit" value="Sil" class="btn btn-info" />
+            </div>
+        </div>
+    }
+</div>

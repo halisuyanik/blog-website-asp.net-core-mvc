@@ -1,0 +1,21 @@
+﻿@model IEnumerable<MVC_Blog_Website.Models.Kategori>
+@{
+    Layout = null;
+}
+<div class="card my-4">
+    <h5 class="card-header bg-danger text-white">Kategoriler</h5>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-6">
+                @foreach (var item in Model)
+                {
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="/Home/Kategori/@item.KategoriId">@item.KategoriAdi</a>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>

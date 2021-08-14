@@ -1,0 +1,107 @@
+﻿@model MVC_Blog_Website.Models.Makale
+
+@{
+    ViewBag.Title = "MakaleDetay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#gonder").click(function () {
+            var yorumunuz = $("#yorum").val();
+            $.ajax({
+                url: '/Home/YorumYap/',
+                data: { yorum:yorumunuz, MakaleId:@Model.MakaleId },
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    alert("Yorumunuz Paylaşıldı: " + yorumunuz);
+                }
+            });
+        });
+    })
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: '/Home/OkunmaSayısınıArttır/',
+            data: { MakaleId:@Model.MakaleId},
+            type: 'Post'
+        });
+
+    })
+</script>
+<h2><label style="font-weight:bold; margin-top:15px;">@Model.Baslik</label></h2>
+<div style="font-size:20px;">
+    <p><span class="far fa-clock" style="color:crimson;"></span>@String.Format("{0: MMMMM dd, yyyy HH:mm}", @Model.Tarih)</p>
+    <span class="fab fa-ethereum" style="color:crimson"></span><label style="color:crimson;font-weight:bold;"> @Model.Kategori.KategoriAdi</label><br />
+    @*@Html.DisplayFor(model => model.Kategori.KategoriAdi)*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            @{
+                int IlkNokta = Model.Icerik.IndexOf('.');
+                <label style="text-indent:50px; font-weight:bolder;">@Model.Icerik.Substring(0, IlkNokta + 1)</label>
+                <img src="@Model.Gorsel" style="width:auto;" class="img-thumbnail" />
+                int son = Model.Icerik.LastIndexOf('.');
+                <label style="text-indent:50px;"> @Model.Icerik.Substring(IlkNokta + 1).</label>
+            }
+        </dd>
+        <dd class="col-md-12">
+            <p style="color:crimson;font-weight:bold;">Yazar:</p>
+            <img src="@Model.Uye.Foto" class="img-circle" width="75" alt="@Model.Uye.AdSoyad" />
+            <span class="fab fa-envira" style="color:crimson;font-weight:bold;"></span><label style="color:crimson;font-weight:bold;">
+                @Model.Uye.AdSoyad-@Model.Uye.KullaniciAdi
+            </label>
+            <hr>
+            <p style="color:crimson;">
+                <span class="fas fa-book-reader"></span> @Model.Okunma kez okundu
+            </p>
+            <hr>
+
+        </dd>
+    </dl>
+</div>
+
+@if (Session["uyeid"] != null)
+{
+    <div class="card my-5">
+        <h5 class="card-header bg-danger">Yorum Yap:</h5>
+        <div class="card-body ">
+            <form>
+                <div class="form-group">
+                    <textarea id="yorum" class="form-control" rows="3"></textarea>
+                </div>
+                <button id="gonder" type="submit" style="float:right" class="btn btn-primary">Paylaş</button>
+            </form>
+
+        </div>
+    </div>
+}
+else
+{
+    <h4>Makaleye yorum yapabilmek için kullanıcı girişi yapmalısınız.</h4>
+    <p><a href="/Uye/Login/">Giriş Yap</a></p>
+
+}
+
+<!-- Single Comment -->
+<hr>
+<p style="color:crimson;font-weight:bold;">Yorumlar:</p>
+@foreach (var item in Model.Yorums.ToList())
+{<div class="media mb-4">
+
+        <img class="d-flex mr-3 rounded-circle" width="75" src="@item.Uye.Foto" alt="@item.Uye.AdSoyad">
+
+        <div class="media-body">
+            <h5 class="mt-0">@item.Uye.AdSoyad - @@@item.Uye.KullaniciAdi</h5>
+            @item.Icerik -@if (Convert.ToInt32(Session["uyeid"]) == item.UyeId)
+            {
+                <a class="btn-danger" href="/Home/YorumSil/@item.YorumId">Sil</a>
+            }
+        </div>
+
+    </div>
+}
+
+
+

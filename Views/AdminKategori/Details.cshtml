@@ -1,0 +1,31 @@
+﻿@model MVC_Blog_Website.Models.Kategori
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="font-family:'Century Gothic';margin-left:15px;">Kategori Detay</h2>
+
+<div>
+    <h4 style="font-family:'Century Gothic';margin-left:15px;">Kategori</h4>
+    <hr />
+    <dl class="dl-horizontal" style="font-family:'Century Gothic';margin-left:15px;">
+        <dt>
+            <label>Kategori Adı</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KategoriAdi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-4">
+            <a href="/AdminKategori/Index/"><input type="button" value="Geri Dön" class="btn btn-danger" /></a>
+            @Html.ActionLink("Düzenle", "Edit", new { id = Model.KategoriId }, htmlAttributes: new { @class = "btn btn-info" })
+        </div>
+    </div>
+</p>

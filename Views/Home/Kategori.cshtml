@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MVC_Blog_Website.Models.Makale>
+
+@{
+    ViewBag.Title = "KategoriMakaleleriDetay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-12" style="margin-top:15px; font-family:'Century Gothic'">
+            <h2>
+                <a href="/Home/MakaleDetay/@item.MakaleId">@item.Baslik</a>
+            </h2>
+            <p class="lead">
+                <span class="fab fa-envira" style="color:crimson;font-weight:bold;"></span><label style="color:crimson;font-weight:bold;">
+                    @item.Uye.AdSoyad
+                </label>
+
+            </p>
+            <p style="color:crimson"><span class="far fa-clock"></span>@String.Format("{0: MMMMM dd, yyyy HH:mm}", item.Tarih)</p>
+            <hr>
+            <p style="color:crimson;">
+                <span class="fab fa-ethereum"></span> @item.Kategori.KategoriAdi
+            </p>
+            <hr>
+            <p style="color:crimson;">
+                <span class="fas fa-book-reader"></span> @item.Okunma kez okundu
+            </p>
+            <hr>
+            <img class="img-thumbnail" alt="@item.Baslik" width="750" height="300" src="@item.Gorsel" />
+            <hr>
+            @{
+                int noktayakadar = item.Icerik.IndexOf('.');
+                <p style="font-family:'Century Gothic'; font-size:20px; font-weight:bold;">@Html.Raw(item.Icerik.Substring(0, noktayakadar + 1))..</p>
+            }
+
+
+            <a class="btn btn-primary" href="/Home/MakaleDetay/@item.MakaleId">Devamını Oku<span class="glyphicon glyphicon-chevron-right"></span></a>
+            <hr>
+        </div>
+    }
+</div>

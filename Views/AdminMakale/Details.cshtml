@@ -1,0 +1,79 @@
+﻿@model MVC_Blog_Website.Models.Makale
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="font-family:'Century Gothic';margin-left:15px;">Makale Detay</h2>
+
+<div>
+    <h4 style="font-family:'Century Gothic';margin-left:15px;">Makale</h4>
+    <hr />
+    <dl class="dl-horizontal" style="font-family:'Century Gothic';margin-left:15px;">
+        <dt>
+            <label>Makale Adı</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategori.KategoriAdi)
+        </dd>
+
+        <dt>
+            <label>Makale Başlık</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Baslik)
+        </dd>
+
+        <dt>
+            <label>Makale İçerik</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Icerik)
+        </dd>
+
+        <dt>
+            <label>Makale Thumbnail</label>
+        </dt>
+
+        <dd>
+            <img src="@Model.Gorsel" width="150" />
+        </dd>
+
+        <dt>
+            <label>Makale Tarih</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tarih)
+        </dd>
+
+        <dt>
+            <label>Üye Id</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UyeId)
+        </dd>
+
+        <dt>
+            <label>Okunma</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Okunma)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-4">
+            <a href="/AdminMakale/Index/"><input type="button" value="Geri Dön" class="btn btn-danger" /></a>
+            @Html.ActionLink("Düzenle", "Edit", new { id = Model.MakaleId }, htmlAttributes: new { @class = "btn btn-info" })
+        </div>
+    </div>
+</p>

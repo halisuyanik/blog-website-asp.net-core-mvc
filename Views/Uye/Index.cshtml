@@ -1,0 +1,66 @@
+﻿@model MVC_Blog_Website.Models.Uye
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h4 style="font-family:'Century Gothic';margin-top:15px; margin-left:15px;">Üye Bilgileri</h4>
+    <hr />
+    <dl class="dl-horizontal" style="font-family:'Century Gothic';margin-left:15px;">
+        <dt>
+            <label>Yetki Türü</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Yetki.Yetki1)
+        </dd>
+
+        <dt>
+            <label class="control-label">Kullanıcı Adı</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KullaniciAdi)
+        </dd>
+
+        <dt>
+            <label class="control-label">E-mail</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            <label class="control-label">Şifre</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sifre)
+        </dd>
+
+        <dt>
+            <label class="control-label">Ad Soyad</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdSoyad)
+        </dd>
+
+        <dt>
+            <label class="control-label">Profil Foto</label>
+        </dt>
+
+        <dd>
+            <img width="150" src="@Model.Foto" class="rounded-circle" alt="@Model.AdSoyad" />
+        </dd>
+
+    </dl>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-4">
+            <a href="/Home/Index/"><input type="button" value="Geri Dön" class="btn btn-danger" /></a>
+            @Html.ActionLink("Güncelle", "Edit", new { id = Model.UyeId }, htmlAttributes: new { @class = "btn btn-info" })
+        </div>
+    </div>
+</div>

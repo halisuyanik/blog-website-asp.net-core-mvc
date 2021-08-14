@@ -1,0 +1,79 @@
+﻿@model IEnumerable<MVC_Blog_Website.Models.Makale>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="font-family:'Century Gothic';margin-left:15px;">Makaleler</h2>
+
+<p style="font-family:'Century Gothic';margin-left:15px;">
+    @Html.ActionLink("Yeni Makale Oluştur", "Create")
+</p>
+<table class="table table-responsive-md" style="font-family:'Century Gothic';">
+    <tr>
+        <th>
+            <label>Makale Adı</label>
+        </th>
+        <th>
+            <label>Makale Başlık</label>
+        </th>
+        <th>
+            <label>Makale İçerik</label>
+        </th>
+        <th>
+            <label>Makale Thumbnail</label>
+        </th>
+        <th>
+            <label>Makale Tarih</label>
+        </th>
+        <th>
+            <label>Üye Id</label>
+        </th>
+        <th>
+            <label>Okunma</label>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kategori.KategoriAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Baslik)
+            </td>
+            <td>
+                @if (item.Icerik.Length>100)
+                {
+                   <p style="font-family:'Century Gothic';"> @Html.Raw(item.Icerik.Substring(0, 200))<font size="4" color="red" >...(Devam)</font></p>
+                }
+                else
+                {
+                   <p style="font-family:'Century Gothic';"> @Html.Raw(item.Icerik)</p>
+                }
+                @*@Html.DisplayFor(modelItem => item.Icerik)*@
+            </td>
+            <td>
+                <img width="75" src="@item.Gorsel" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tarih)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UyeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Okunma)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.MakaleId }) |
+                @Html.ActionLink("Detay", "Details", new { id = item.MakaleId }) |
+                @Html.ActionLink("Sil", "Delete", new { id = item.MakaleId })
+            </td>
+        </tr>
+    }
+
+</table>
